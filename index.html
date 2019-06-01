@@ -62,9 +62,51 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Day7 List " class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-贪吃蛇" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/06/01/Day7 List /" class="article-date">
+    <a href="/2019/06/01/贪吃蛇/" class="article-date">
+  <time datetime="2019-06-01T04:11:08.662Z" itemprop="datePublished">2019-06-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python-Project/">Python Project</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/01/贪吃蛇/">Pygame 贪吃蛇小游戏</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">import pygame</span><br><span class="line">import random</span><br><span class="line">from pygame.locals import *</span><br><span class="line"></span><br><span class="line"># 定义游戏结束函数con</span><br><span class="line">def game_over():</span><br><span class="line">    pygame.quit()</span><br><span class="line">    sys.exit()</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    # 初始化游戏界面</span><br><span class="line">    pygame.init()</span><br><span class="line">    # 定义一个变量来控制速度</span><br><span class="line">    snack_speed = pygame.time.Clock()</span><br><span class="line">    # 创建界面</span><br><span class="line">    window = pygame.display.set_mode((640,480))</span><br><span class="line">    # 显示标题</span><br><span class="line">    pygame.display.set_caption(&quot;贪吃蛇&quot;)</span><br><span class="line"></span><br><span class="line">    # 初始化变量</span><br><span class="line">    # 贪吃蛇初始位置</span><br><span class="line">    snack_position = [100,100]</span><br><span class="line">    # 初始化贪吃蛇长度 列表里面元素代表有几段</span><br><span class="line">    snack_body = [[100,100],[80,100],[60,100]]</span><br><span class="line">    # 初始化目标小方块位置</span><br><span class="line">    target_position = [300,300]</span><br><span class="line"></span><br><span class="line">    # 目标方块的标记，判断是否吃掉这个目标</span><br><span class="line">    target_flag = 1</span><br><span class="line">    # 初始化方向</span><br><span class="line">    direction = &quot;right&quot;</span><br><span class="line">    # 定义一个方向变量</span><br><span class="line">    change_direction = direction</span><br><span class="line"></span><br><span class="line">    while True:</span><br><span class="line">        for event in pygame.event.get():</span><br><span class="line">            if event.type == QUIT:</span><br><span class="line">                exit()  # 关闭程序</span><br><span class="line">            elif event.type == pygame.KEYDOWN:</span><br><span class="line">                if event.key == pygame.K_RIGHT:</span><br><span class="line">                    change_direction = &quot;right&quot;</span><br><span class="line">                if event.key == K_LEFT:</span><br><span class="line">                    change_direction = &quot;left&quot;</span><br><span class="line">                if event.key == pygame.K_UP:</span><br><span class="line">                    change_direction = &quot;down&quot;</span><br><span class="line">                if event.key == K_DOWN:</span><br><span class="line">                    change_direction = &quot;up&quot;</span><br><span class="line">                if event.key == K_ESCAPE:</span><br><span class="line">                    pygame.event.post(pygame.event.Event(quit()))</span><br><span class="line">        # 确定方向</span><br><span class="line">        if change_direction == &quot;left&quot; and not direction == &quot;right&quot;:</span><br><span class="line">            direction = change_direction</span><br><span class="line">        if change_direction == &quot;right&quot; and not direction == &quot;left&quot;:</span><br><span class="line">            direction = change_direction</span><br><span class="line">        if change_direction == &quot;up&quot; and not direction == &quot;down&quot;:</span><br><span class="line">            direction = change_direction</span><br><span class="line">        if change_direction == &quot;down&quot; and not direction == &quot;up&quot;:</span><br><span class="line">            direction = change_direction</span><br><span class="line">        # 根据方向移动蛇头</span><br><span class="line">        if direction == &quot;right&quot;:</span><br><span class="line">            snack_position[0] += 20</span><br><span class="line">        if direction == &quot;left&quot;:</span><br><span class="line">            snack_position[0] -= 20</span><br><span class="line">        if direction == &quot;up&quot;:</span><br><span class="line">            snack_position[1] += 20</span><br><span class="line">        if direction == &quot;down&quot;:</span><br><span class="line">            snack_position[1] -= 20</span><br><span class="line"></span><br><span class="line">        # 增加蛇的长度</span><br><span class="line">        snack_body.insert(0,snack_position[::])</span><br><span class="line">        # 如果贪吃蛇的位置和方块重合，则长度加长</span><br><span class="line">        if snack_position == target_position:</span><br><span class="line">            target_flag = 0</span><br><span class="line">        else:</span><br><span class="line">            snack_body.pop()</span><br><span class="line"></span><br><span class="line">        if target_flag == 0:</span><br><span class="line">            print(&quot;游戏得分:%d&quot;%(len(snack_body)-3))</span><br><span class="line">            x = int(random.randint(1, 31) * 20)</span><br><span class="line">            y = int(random.randint(1, 23) * 20)</span><br><span class="line">            target_position = [x, y]</span><br><span class="line">            target_flag = 1</span><br><span class="line"></span><br><span class="line">        # 填充背景颜色</span><br><span class="line">        window.fill((0,100,0))</span><br><span class="line">        for position in snack_body:</span><br><span class="line">            pygame.draw.rect(window,(255,255,255),Rect(position[0],position[1],20,20))</span><br><span class="line">        pygame.draw.rect(window,(255, 0, 0), Rect(target_position[0], target_position[1], 20, 20))</span><br><span class="line">        pygame.display.flip() # 刷新界面</span><br><span class="line"></span><br><span class="line">        if snack_position[0] &gt; 620 or snack_position[1] &lt; 0:</span><br><span class="line">            game_over()</span><br><span class="line">        elif snack_position[1] &gt; 460 or snack_position[1] &lt; 0:</span><br><span class="line">            game_over()</span><br><span class="line"></span><br><span class="line">        # 控制速度</span><br><span class="line">        snack_speed.tick(5)</span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://karnuo.cn/2019/06/01/贪吃蛇/" data-id="cjwd09cmy0000fcvetrpgqpbp" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-List " class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/01/List /" class="article-date">
   <time datetime="2019-06-01T03:00:08.092Z" itemprop="datePublished">2019-06-01</time>
 </a>
     
@@ -80,7 +122,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/01/Day7 List /">Str &amp; List</a>
+      <a class="article-title" href="/2019/06/01/List /">Str &amp; List</a>
     </h1>
   
 
@@ -105,15 +147,12 @@
 
 <h3 id="1-4-max和min-max-序列-min-序列"><a href="#1-4-max和min-max-序列-min-序列" class="headerlink" title="1.4 max和min  max(序列), min(序列)"></a>1.4 max和min  max(序列), min(序列)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(max(<span class="string">'ajsfddfgs李asf'</span>)) <span class="comment"># 李</span></span><br><span class="line">print(min(<span class="string">'ahsjfkaferesajf'</span>))<span class="comment"># a</span></span><br><span class="line">print(max(range(<span class="number">100</span>)))  <span class="comment"># 99</span></span><br></pre></td></tr></table></figure>
 
-<p>###1.5 字符串.replace(old,new)  -  将字符串中指定的旧字符串全部替换成新的字符串<br>字符串.replace(old,new,替换次数)</p>
+<h3 id="1-5-字符串-replace-old-new-将字符串中指定的旧字符串全部替换成新的字符串"><a href="#1-5-字符串-replace-old-new-将字符串中指定的旧字符串全部替换成新的字符串" class="headerlink" title="1.5 字符串.replace(old,new)  -  将字符串中指定的旧字符串全部替换成新的字符串"></a>1.5 字符串.replace(old,new)  -  将字符串中指定的旧字符串全部替换成新的字符串</h3><p>字符串.replace(old,new,替换次数)</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">str1 = <span class="string">'how are you! fine,and you'</span></span><br><span class="line">new_str = str1.replace(<span class="string">'y'</span>, <span class="string">'me'</span>, <span class="number">1</span>) <span class="comment">#1代表替换1次</span></span><br><span class="line">print(new_str) <span class="comment">#how are meou! fine,and you</span></span><br></pre></td></tr></table></figure>
 
-<p>###1.6 字符串1.split(字符串2)   - 将字符串1按照字符串2进行切割，返回的是列表</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">str1 = <span class="string">'how are you! fine, and you'</span></span><br><span class="line">result = str1.split(<span class="string">' '</span>)</span><br><span class="line">print(result) <span class="comment">#['how', 'are', 'you!', 'fine,', 'and', 'you']</span></span><br></pre></td></tr></table></figure>
+<h3 id="1-6-字符串1-split-字符串2-将字符串1按照字符串2进行切割，返回的是列表"><a href="#1-6-字符串1-split-字符串2-将字符串1按照字符串2进行切割，返回的是列表" class="headerlink" title="1.6 字符串1.split(字符串2)   - 将字符串1按照字符串2进行切割，返回的是列表"></a>1.6 字符串1.split(字符串2)   - 将字符串1按照字符串2进行切割，返回的是列表</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">str1 = <span class="string">'how are you! fine, and you'</span></span><br><span class="line">result = str1.split(<span class="string">' '</span>)</span><br><span class="line">print(result) <span class="comment">#['how', 'are', 'you!', 'fine,', 'and', 'you']</span></span><br></pre></td></tr></table></figure>
 
-<p>##2  列表(list)</p>
-<p>###2.1 列表概述</p>
-<ul>
+<h2 id="2-列表-list"><a href="#2-列表-list" class="headerlink" title="2  列表(list)"></a>2  列表(list)</h2><h3 id="2-1-列表概述"><a href="#2-1-列表概述" class="headerlink" title="2.1 列表概述"></a>2.1 列表概述</h3><ul>
 <li>列表是python提供的容器型数据类型(序列), 可变、有序<ul>
 <li>可变(元素的个数、值和顺序可变) - 支持增删改</li>
 <li>有序  - 支持下标操作</li>
@@ -127,9 +166,7 @@
 </ul>
 </li>
 </ul>
-<p>###2.2.列表元素的操作</p>
-<p>####2.2.1  查 - 获取列表中的元素</p>
-<ul>
+<h3 id="2-2-列表元素的操作"><a href="#2-2-列表元素的操作" class="headerlink" title="2.2.列表元素的操作"></a>2.2.列表元素的操作</h3><h4 id="2-2-1-查-获取列表中的元素"><a href="#2-2-1-查-获取列表中的元素" class="headerlink" title="2.2.1  查 - 获取列表中的元素"></a>2.2.1  查 - 获取列表中的元素</h4><ul>
 <li><p>获取单个元素</p>
 <ul>
 <li><p>语法: 列表[下标]  - 获取列表中指定下标对应的元素 (返回值就是对应的元素)</p>
@@ -158,8 +195,7 @@
 
 </li>
 </ul>
-<p>####2.2.2 增 - 添加元素</p>
-<ul>
+<h4 id="2-2-2-增-添加元素"><a href="#2-2-2-增-添加元素" class="headerlink" title="2.2.2 增 - 添加元素"></a>2.2.2 增 - 添加元素</h4><ul>
 <li><p>列表.append(元素)   -  在列表的最后添加一个元素(修改原列表，不会产生新的列表)</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">films = [<span class="string">'复联4'</span>, <span class="string">'指环王'</span>, <span class="string">'绿皮书'</span>, <span class="string">'你的名字'</span>, <span class="string">'千与千寻'</span>]</span><br><span class="line">films.append(<span class="string">'肖生克的救赎'</span>) <span class="comment">#注意在原先列表上操作，如果前加list2 = 打印是none</span></span><br><span class="line">print(films)</span><br></pre></td></tr></table></figure>
 </li>
@@ -171,8 +207,7 @@
 
 </li>
 </ul>
-<p>####2.2.3  删 - 删除列表中的元素</p>
-<ul>
+<h4 id="2-2-3-删-删除列表中的元素"><a href="#2-2-3-删-删除列表中的元素" class="headerlink" title="2.2.3  删 - 删除列表中的元素"></a>2.2.3  删 - 删除列表中的元素</h4><ul>
 <li><p>del 列表[下标]   -  删除列表中指定下标对应的元素 下标不能越界</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">numbers = [<span class="number">1</span>, <span class="number">8</span>, <span class="number">12</span>, <span class="number">30</span>, <span class="number">45</span>]</span><br><span class="line"><span class="keyword">del</span> numbers[<span class="number">1</span>]</span><br><span class="line">print(numbers)</span><br><span class="line"></span><br><span class="line"><span class="keyword">del</span> films[<span class="number">100</span>]   <span class="comment"># IndexError: list assignment index out of range</span></span><br></pre></td></tr></table></figure>
 </li>
@@ -212,8 +247,7 @@
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">scores = [<span class="number">70</span>, <span class="number">45</span>, <span class="number">50</span>, <span class="number">87</span>, <span class="number">67</span>, <span class="number">30</span>, <span class="number">100</span>]</span><br><span class="line"><span class="keyword">for</span> score <span class="keyword">in</span> scores[:]: <span class="comment">#[:]深拷贝 长度不变</span></span><br><span class="line">    <span class="keyword">if</span> score &lt; <span class="number">60</span>:</span><br><span class="line">        scores.remove(score)</span><br><span class="line"></span><br><span class="line">print(scores)</span><br></pre></td></tr></table></figure>
 
-<p>####2.2.4 改  - 修改元素的值</p>
-<ul>
+<h4 id="2-2-4-改-修改元素的值"><a href="#2-2-4-改-修改元素的值" class="headerlink" title="2.2.4 改  - 修改元素的值"></a>2.2.4 改  - 修改元素的值</h4><ul>
 <li>列表[下标] = 新值    -  修改指定下标对应的元素为新值</li>
 <li>注意: 下标不能越界!<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">balls = [<span class="string">'乒乓球'</span>, <span class="string">'篮球'</span>, <span class="string">'足球'</span>, <span class="string">'排球'</span>]</span><br><span class="line">balls[<span class="number">1</span>] = <span class="string">'羽毛球'</span></span><br><span class="line">print(balls)</span><br></pre></td></tr></table></figure>
 
@@ -221,9 +255,7 @@
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scores = [<span class="number">70</span>, <span class="number">45</span>, <span class="number">50</span>, <span class="number">87</span>, <span class="number">67</span>, <span class="number">30</span>, <span class="number">100</span>]</span><br><span class="line"><span class="keyword">for</span> index <span class="keyword">in</span> range(len(scores)):</span><br><span class="line">    <span class="keyword">if</span> scores[index] &lt; <span class="number">60</span>:</span><br><span class="line">        scores[index] = <span class="string">'不及格'</span></span><br><span class="line">print(scores)</span><br></pre></td></tr></table></figure>
 
-<p>###2.3 列表运算符</p>
-<p>####2.3.1  数学运算: +, *</p>
-<ul>
+<h3 id="2-3-列表运算符"><a href="#2-3-列表运算符" class="headerlink" title="2.3 列表运算符"></a>2.3 列表运算符</h3><h4 id="2-3-1-数学运算"><a href="#2-3-1-数学运算" class="headerlink" title="2.3.1  数学运算: +, *"></a>2.3.1  数学运算: +, *</h4><ul>
 <li><p>列表1+列表2  -&gt; 将两个列表中的元素合并产生一个新的列表</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">list1 = [<span class="number">43</span>,<span class="number">65</span>,<span class="number">76</span>,<span class="number">6</span>]</span><br><span class="line">list2 = [<span class="number">45</span>,<span class="number">77</span>,<span class="number">90</span>,<span class="number">11</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">66</span>]</span><br><span class="line">print(list1 + list2)  <span class="comment">#[43,65,76,6,45,77,90,11,2,4,66]  产生一个新列表</span></span><br></pre></td></tr></table></figure>
 </li>
@@ -232,11 +264,9 @@
 
 </li>
 </ul>
-<p>####2.3.2  比较运算: ==, != 返回布尔值</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] == [<span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>])</span><br><span class="line">print([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] == [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+<h4 id="2-3-2-比较运算-返回布尔值"><a href="#2-3-2-比较运算-返回布尔值" class="headerlink" title="2.3.2  比较运算: ==, != 返回布尔值"></a>2.3.2  比较运算: ==, != 返回布尔值</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] == [<span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>])</span><br><span class="line">print([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] == [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br></pre></td></tr></table></figure>
 
-<p>###2.4 列表操作方法</p>
-<ul>
+<h3 id="2-4-列表操作方法"><a href="#2-4-列表操作方法" class="headerlink" title="2.4 列表操作方法"></a>2.4 列表操作方法</h3><ul>
 <li><p>元素 in 列表   -&gt; 判断列表中是否包含指定的元素</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">print([<span class="number">1</span>, <span class="number">2</span>] <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="number">1</span>, <span class="number">2</span>]])  <span class="comment"># True</span></span><br><span class="line">print([<span class="number">1</span>, <span class="number">2</span>] <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])  <span class="comment"># False</span></span><br><span class="line">print(<span class="number">1</span> <span class="keyword">in</span> [[<span class="number">1</span>], <span class="number">2</span>, <span class="number">3</span>])  <span class="comment"># False</span></span><br><span class="line">print(<span class="number">1</span> <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])  <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
 </li>
@@ -251,56 +281,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://karnuo.cn/2019/06/01/Day7 List /" data-id="cjwcxlmkg0001rkvevppbzmwh" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/06/01/hello-world/" class="article-date">
-  <time datetime="2019-06-01T02:42:19.379Z" itemprop="datePublished">2019-06-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/01/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://karnuo.cn/2019/06/01/hello-world/" data-id="cjwcxlmk30000rkveqk28xcdq" class="article-share-link">Share</a>
+      <a data-url="http://karnuo.cn/2019/06/01/List /" data-id="cjwd09co80003fcvedaxispgj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -320,7 +301,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Python基础/">Python基础</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Python-Project/">Python Project</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python基础/">Python基础</a></li></ul>
     </div>
   </div>
 
@@ -348,11 +329,11 @@
       <ul>
         
           <li>
-            <a href="/2019/06/01/Day7 List /">Str &amp; List</a>
+            <a href="/2019/06/01/贪吃蛇/">Pygame 贪吃蛇小游戏</a>
           </li>
         
           <li>
-            <a href="/2019/06/01/hello-world/">Hello World</a>
+            <a href="/2019/06/01/List /">Str &amp; List</a>
           </li>
         
       </ul>
